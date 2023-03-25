@@ -1,0 +1,7 @@
+﻿# This file adjusts exception information used by Tetractic.CodeAnalysis.ExceptionAnalyzers.
+# Usage: <memberId>[ <accessor>] (-/+)<exceptionTypeId>
+# See ECMA-334, 5th Ed. § D.4.2 "ID string format" for a description of the ID format.
+
+M:Microsoft.AspNetCore.Routing.IRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection) +T:System.ArgumentNullException
+P:System.Array.Length get -T:System.OverflowException
+M:System.MemoryExtensions.AsSpan``1(``0[],System.Int32,System.Int32) -T:System.ArrayTypeMismatchException

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\ExceptionAdjustments.txt" />
+    <EmbeddedResource Include="GameFiles\*.DAT" />
+    <Compile Include="..\Lemmings\Data\*.cs" Link="Lemmings\Data\%(Filename)%(Extension)" />
+    <Compile Include="..\Lemmings\LevelRenderer.cs" Link="Lemmings\%(Filename)%(Extension)" />
+    <Compile Include="..\Lemmings\UnreachableException.cs" Link="Lemmings\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
+    <PackageReference Include="Tetractic.CodeAnalysis.ExceptionAnalyzers" Version="1.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Tetractic.CommandLine" Version="1.2.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\ExceptionAdjustments.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tetractic.CodeAnalysis.ExceptionAnalyzers" Version="1.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Tetractic.CommandLine" Version="1.2.0" />
+  </ItemGroup>
+
+</Project>
