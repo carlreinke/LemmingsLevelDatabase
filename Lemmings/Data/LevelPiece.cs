@@ -25,6 +25,8 @@ internal readonly struct LevelPiece
         YPlus4AndId = yAndId;
     }
 
+    public bool IsUsed => ModifiersAndXPlus16 != 0xFFFF;
+
     public PieceModifiers Modifiers => (PieceModifiers)(ModifiersAndXPlus16 & 0xF000);
 
     public short X => (short)((ModifiersAndXPlus16 & 0x0FFF) - 16);

@@ -46,11 +46,18 @@ namespace Lemmings
         public static void RenderPieces(VgaGround vgaGround, Level level, byte[] piecesImage)
         {
             foreach (var levelPiece in level.Pieces)
+            {
+                // DOS version stops on first unused piece.
+                if (!levelPiece.IsUsed)
+                    break;
+
                 RenderPiece(vgaGround, levelPiece, piecesImage);
+            }
         }
 
         public static void RenderPiece(VgaGround vgaGround, in LevelPiece levelPiece, byte[] piecesImage)
         {
+            Debug.Assert(levelPiece.IsUsed);
             Debug.Assert(piecesImage.Length == 1600 * 160);
 
             if (levelPiece.Id >= vgaGround.PieceInfos.Length)
@@ -147,17 +154,12 @@ namespace Lemmings
         public static void RenderObjects(VgaGround vgaGround, Level level, byte[] piecesImage, byte[] objectsImage)
         {
             foreach (var levelObject in level.Objects)
-                RenderObject(vgaGround, levelObject, piecesImage, objectsImage);
+                if (levelObject.IsUsed)
+                    RenderObject(vgaGround, levelObject, piecesImage, objectsImage);
         }
 
         public static void RenderObject(VgaGround vgaGround, in LevelObject levelObject, byte[] piecesImage, byte[] objectsImage)
         {
-            Debug.Assert(piecesImage.Length == 1600 * 160);
-            Debug.Assert(objectsImage.Length == 1600 * 160);
-
-            if (levelObject.Unused)
-                return;
-
             if (levelObject.Id >= vgaGround.ObjectInfos.Length)
                 return;  // TODO: Is this the correct behavior?  Error?
 
@@ -170,12 +172,6 @@ namespace Lemmings
 
         public static void RenderObject(VgaGround vgaGround, in LevelObject levelObject, ushort frameId, byte[] piecesImage, byte[] objectsImage)
         {
-            Debug.Assert(piecesImage.Length == 1600 * 160);
-            Debug.Assert(objectsImage.Length == 1600 * 160);
-
-            if (levelObject.Unused)
-                return;
-
             if (levelObject.Id >= vgaGround.ObjectInfos.Length)
                 return;  // TODO: Is this the correct behavior?  Error?
 
@@ -188,6 +184,10 @@ namespace Lemmings
 
         private static void RenderObject(in ObjectInfo objectInfo, byte[] srcImage, in LevelObject levelObject, byte[] piecesImage, byte[] objectsImage)
         {
+            Debug.Assert(levelObject.IsUsed);
+            Debug.Assert(piecesImage.Length == 1600 * 160);
+            Debug.Assert(objectsImage.Length == 1600 * 160);
+
             byte height = objectInfo.Height;
             byte width = objectInfo.Width;
 
@@ -296,7 +296,8 @@ namespace Lemmings
 
             // TODO: Objects with index >= 16 have no effect?
             foreach (var levelObject in level.Objects)
-                RenderObjectEffectBoundary(vgaGround, levelObject, image);
+                if (levelObject.IsUsed)
+                    RenderObjectEffectBoundary(vgaGround, levelObject, image);
         }
 
         public static void RenderMetalEffect(in LevelMetal levelMetal, Effect[] effectMap)
@@ -321,6 +322,7 @@ namespace Lemmings
 
         public static void RenderObjectEffect(VgaGround vgaGround, in LevelObject levelObject, Effect[] effectMap)
         {
+            Debug.Assert(levelObject.IsUsed);
             Debug.Assert(effectMap.Length == 400 * 40);
 
             // TODO
@@ -329,10 +331,8 @@ namespace Lemmings
 
         public static void RenderObjectEffectBoundary(VgaGround vgaGround, in LevelObject levelObject, byte[] image)
         {
+            Debug.Assert(levelObject.IsUsed);
             Debug.Assert(image.Length == 1600 * 160);
-
-            if (levelObject.Unused)
-                return;
 
             if (levelObject.Id >= vgaGround.ObjectInfos.Length)
                 return;  // TODO: Is this the correct behavior?  Error?

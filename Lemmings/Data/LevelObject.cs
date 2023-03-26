@@ -31,7 +31,7 @@ internal readonly struct LevelObject
         Modifiers = modifiers;
     }
 
-    public bool Unused => XPlus16 == 0;
+    public bool IsUsed => XPlus16 != 0;
 
     public short X => (short)(XPlus16 - 16);
 

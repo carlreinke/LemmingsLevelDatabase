@@ -16,16 +16,16 @@ internal readonly struct LevelMetal
 {
     public readonly ushort XPlus4AndY;
     public readonly byte WidthMinus1AndHeightMinus1;
-    public readonly byte Unused;
+    public readonly byte Unknown;
 
     public LevelMetal(
         ushort xAndY,
         byte widthMinus1AndHeightMinus1,
-        byte unused)
+        byte unknown)
     {
         XPlus4AndY = xAndY;
         WidthMinus1AndHeightMinus1 = widthMinus1AndHeightMinus1;
-        Unused = unused;
+        Unknown = unknown;
     }
 
     public short X => (short)((XPlus4AndY >> 7) - 4);
