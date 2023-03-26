@@ -284,9 +284,10 @@ namespace Lemmings
             foreach (var levelMetal in level.Metals)
                 RenderMetalEffect(levelMetal, effectMap);
 
-            // TODO: Objects with index >= 16 have no effect?
-            foreach (var levelObject in level.Objects)
-                RenderObjectEffect(vgaGround, levelObject, effectMap);
+            // Objects after the first 16 have no effect.
+            for (int i = 0; i < 16; ++i)
+                if (level.Objects[i].IsUsed)
+                    RenderObjectEffect(vgaGround, level.Objects[i], effectMap);
         }
 
         public static void RenderEffectBoundaries(VgaGround vgaGround, Level level, byte[] image)
@@ -294,10 +295,10 @@ namespace Lemmings
             foreach (var levelMetal in level.Metals)
                 RenderMetalEffectBoundary(levelMetal, image);
 
-            // TODO: Objects with index >= 16 have no effect?
-            foreach (var levelObject in level.Objects)
-                if (levelObject.IsUsed)
-                    RenderObjectEffectBoundary(vgaGround, levelObject, image);
+            // Objects after the first 16 have no effect.
+            for (int i = 0; i < 16; ++i)
+                if (level.Objects[i].IsUsed)
+                    RenderObjectEffectBoundary(vgaGround, level.Objects[i], image);
         }
 
         public static void RenderMetalEffect(in LevelMetal levelMetal, Effect[] effectMap)
