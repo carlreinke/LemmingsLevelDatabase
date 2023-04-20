@@ -152,7 +152,7 @@ internal readonly struct ObjectInfo
             throw new ArgumentException("Invalid length.", nameof(data));
 
         return new ObjectInfo(
-            BinaryPrimitives.ReadUInt16BigEndian(data),
+            BinaryPrimitives.ReadUInt16LittleEndian(data),
             data[2],
             data[3],
             data[4],
