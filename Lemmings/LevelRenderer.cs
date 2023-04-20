@@ -340,13 +340,16 @@ namespace Lemmings
 
             var objectInfo = vgaGround.ObjectInfos[levelObject.Id].Info;
 
-            if (objectInfo.Effect == Effect.None || objectInfo.EffectWidth == 0 || objectInfo.EffectHeight == 0)
+            if (objectInfo.Effect == Effect.None)
                 return;
 
+            int effectWidth = ((objectInfo.EffectWidth - 1) & 0xFF) + 1;
+            int effectHeight = ((objectInfo.EffectHeight - 1) & 0xFF) + 1;
+
             int x1 = (levelObject.X + objectInfo.EffectLeft * 4) & ~0x03;
-            int x2 = x1 + objectInfo.EffectWidth * 4 - 1;
+            int x2 = x1 + effectWidth * 4 - 1;
             int y1 = (levelObject.Y + objectInfo.EffectTop * 4) & ~0x03;
-            int y2 = y1 + objectInfo.EffectHeight * 4 - 1;
+            int y2 = y1 + effectHeight * 4 - 1;
 
             RenderEffectBoundary(image, x1, x2, y1, y2, objectInfo.Effect);
         }
