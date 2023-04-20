@@ -13,7 +13,8 @@ internal enum Effect : byte
 {
     None = 0,
     Exit = 1,
-    TurnAround = 2,
+    TurnLeft = 2,
+    TurnRight = 3,
     Trap = 4,
     Drown = 5,
     Disintegrate = 6,
